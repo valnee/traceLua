@@ -1,3 +1,4 @@
+local PRINT = false
 local function inspect(t)
   local values = {}
    for i,v in pairs(t) do
@@ -14,10 +15,12 @@ return function(f)
   return function(...)
     local t = {}
     local out = inspect({f(...)})
-    print("Inputs: " .. tostring(...))
-    print("Output:")
-    for i,v in pairs(out) do
-      print(i, v)
+    if PRINT then
+      print("Inputs: " .. tostring(...))
+      print("Output:")
+      for i,v in pairs(out) do
+        print(i, v)
+      end
     end
     return out
   end
